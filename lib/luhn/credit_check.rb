@@ -12,7 +12,8 @@ module Luhn
       double_every_other(number, 0)
       sum = sum_number(number)
 
-      sum * 9 % 10 == check_digit
+      find_check_digit(sum) == check_digit and
+        validate_full_number(sum, check_digit)
     end
 
     def double_every_other(number, index)
@@ -37,6 +38,14 @@ module Luhn
       end
 
       return sum
+    end
+
+    def find_check_digit(non_check_sum)
+      10 - (non_check_sum % 10)
+    end
+
+    def validate_full_number(non_check_sum, check_digit)
+      (non_check_sum + check_digit) % 10 == 0
     end
   end
 end
