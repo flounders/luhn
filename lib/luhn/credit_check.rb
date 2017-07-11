@@ -16,6 +16,7 @@ module Luhn
         validate_full_number(sum, check_digit)
     end
 
+  private
     def double_every_other(number, index)
       if x = number[index]
         x = x.to_i
@@ -29,11 +30,11 @@ module Luhn
 
     def sum_number(array)
       sum = 0
-      if x = array.pop()
+      if x = array[0]
         if x > 9
-          sum += x / 10 + x % 10 + sum_number(array)
+          sum += x / 10 + x % 10 + sum_number(array[1..-1])
         else
-          sum += x + sum_number(array)
+          sum += x + sum_number(array[1..-1])
         end
       end
 
